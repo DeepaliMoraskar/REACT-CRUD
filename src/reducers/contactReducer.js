@@ -1,14 +1,30 @@
 import * as actionTypes from '../actions/actionTypes';
-
-export default (state = [], action) => {
+var initialState = {
+  toDO: [],
+  bucket : []
+}
+export default (state = initialState, action) => {
     switch (action.type){
-      case actionTypes.CREATE_NEW_CONTACT:
-      return [
-        ...state,
-        Object.assign({}, action.contact)
-      ];
-      case actionTypes.REMOVE_CONTACT:
-      return state.filter((data, i) => i !== action.id);
+      case actionTypes.REMOVE_TODO:
+        return {
+          ...state,  bucket:JSON.parse(JSON.stringify(action.bucket))
+        }
+      case actionTypes.EDIT_TODO:
+      return {
+        ...state, ucket:action.bucket
+      };
+      case actionTypes.CREATE_NEW_BUCKET:
+      return {
+        ...state, bucket:action.bucket
+      }
+      case actionTypes.CREATE_NEW_TODO:
+      return {
+        ...state, bucket:action.bucket
+      }
+      case actionTypes.EDIT_BUCKET:
+      return {
+        ...state,  bucket:action.bucket
+      }
       default:
             return state;
     }
